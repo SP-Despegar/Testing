@@ -1,8 +1,10 @@
 package com.test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 public class Main {
 
@@ -16,6 +18,10 @@ public class Main {
         gcdCalculator = new GCD();
         solution = new Solution();
         amazon = new ASolution();
+
+
+        testIsBalance();
+//        testQueue();
 
         /*
          * Amazon solution
@@ -38,12 +44,58 @@ public class Main {
 
     }
 
+    private static void testIsBalance() {
+
+//        try {
+//
+//            File testCase = new File("/home/santiagopanizza/Escritorio/Test_case.txt");
+//            File result = new File("/home/santiagopanizza/Escritorio/Test_case_result.txt");
+//
+//            BufferedReader testBuffer = new BufferedReader(new FileReader(testCase));
+//            BufferedReader resultBuffer = new BufferedReader(new FileReader(result));
+//
+//            String readLine = "";
+//            String output = "";
+//            System.out.println("Reading file using Buffered Reader");
+//
+//            while ((readLine = testBuffer.readLine()) != null) {
+//                output = solution.isBalanced(readLine);
+//                if(output.compareTo(resultBuffer.readLine()) != 0){
+//                    System.out.println(readLine);
+//                    System.out.println(output);
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        solution.isBalanced("))");
+    }
+
+    private static void testQueue() {
+
+        QueueImp<Integer> q = new QueueImp<>(4);
+
+        q.put(1);
+        q.put(2);
+        q.get();
+        q.put(3);
+        q.get();
+        q.put(4);
+        q.put(5);
+        q.get();
+        q.get();
+        q.get();
+        q.put(6);
+    }
+
     private static void testActivityNotifications() {
 
-        int[] expenditure = new int[]{1,2,3,4,5,6,7,8,9,10};
+        int[] expenditure = new int[]{1,2,3,45,6,3,24,5,6,78,65,43,2,2,4,4};
 
-        Integer result = solution.activityNotifications(expenditure, 5);
+        Integer result = solution.activityNotifications(expenditure, 4);
+        System.out.println("number of notification: "+result);
 
+        result = solution.activityNotifications(expenditure, 2);
         System.out.println("number of notification: "+result);
     }
 

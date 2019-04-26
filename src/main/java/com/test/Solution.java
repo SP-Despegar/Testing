@@ -6,11 +6,107 @@ import java.util.stream.IntStream;
 
 public class Solution {
 
-    int activityNotifications(int[] expenditure, int d) {
+    String isBalanced(String s) {
+        String result = "YES";
 
-        Queue<Integer> fifo = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
 
-        return 1;
+        HashMap<Character,Character> mapOfClosing = new HashMap<>();
+        HashMap<Character,Character> mapOfOpen  = new HashMap<>();
+
+        mapOfClosing.put(')','(');
+        mapOfClosing.put('}','{');
+        mapOfClosing.put(']','[');
+
+        mapOfOpen.put('(','(');
+        mapOfOpen.put('{','{');
+        mapOfOpen.put('[','[');
+
+        Character c = null;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            c = mapOfClosing.get(s.charAt(i));
+            if(c != null){
+                if( ! stack.empty() ){
+                    if(c.compareTo(stack.pop()) != 0){
+                        result = "NO";
+                        break;
+                    }
+                }else{
+                    result = "NO";
+                    break;
+                }
+            }
+
+            c = mapOfOpen.get(s.charAt(i));
+            if(c != null){
+                stack.push(c);
+            }
+            c = null;
+        }
+
+        if( !stack.empty()) result = "NO";
+
+        return result;
+    }
+
+    int activityNotifications(int[] expenditure, int window) {
+        
+        Integer notifications = 0;
+        Float sum = Float.valueOf(0);
+
+        for (int i = 0; i < expenditure.length; i++) {
+
+            if( i < window ){
+                sum = sum + expenditure[i];
+                continue;
+            }
+
+            if( expenditure[i] >= (( sum / window ) * 2)){
+                notifications = notifications + 1;
+            }
+
+            System.out.println("--------------");
+            System.out.println("avg: "+(( sum / window ) * 2));
+            System.out.println("[i]: " + expenditure[i]);
+            System.out.println("[i-d]: " + expenditure[i-window]);
+
+            sum = sum - expenditure[i - window];
+            sum = sum + expenditure[i];
+
+        }
+        return notifications;
+    }
+
+    int activityNotificationsMean(int[] expenditure, int window) {
+        /**
+         * Este metodo utiliza el promedio, no el valor medio...
+         * */
+        Integer notifications = 0;
+        Float sum = Float.valueOf(0);
+
+        for (int i = 0; i < expenditure.length; i++) {
+
+            if( i < window ){
+                sum = sum + expenditure[i];
+                continue;
+            }
+
+            if( expenditure[i] >= (( sum / window ) * 2)){
+                notifications = notifications + 1;
+            }
+
+            System.out.println("--------------");
+            System.out.println("avg: "+(( sum / window ) * 2));
+            System.out.println("[i]: " + expenditure[i]);
+            System.out.println("[i-d]: " + expenditure[i-window]);
+
+            sum = sum - expenditure[i - window];
+            sum = sum + expenditure[i];
+
+        }
+        return notifications;
     }
 
     List<Integer> cellCompete(int[] states, int days){

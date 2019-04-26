@@ -118,5 +118,4 @@ public class ASolution {
 
         return totalTime;
     }
-
 }
